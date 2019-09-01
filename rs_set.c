@@ -123,7 +123,7 @@ uint8_t write_sio_reg(uint8_t LDN, uint8_t reg, uint8_t value)
 
 void __printf_usage()
 {
-	printf("Usage: rs_set -232/-422/-485 	--> setting RS232/422/485\n");
+	printf("Usage: rs_set -com1/2/3/4/5/6 -232/-422/-485 	--> setting comport1/2/3/4/5/6 interface RS232/422/485\n");
 	
 }
 
@@ -155,9 +155,12 @@ uint8_t bData;
 		return -1;
 	}
 
-	if 	( strcmp("-232", argv[1]) == 0 ) bsel = 2;
-	else if ( strcmp("-422", argv[1]) == 0 ) bsel = 1;
-	else if ( strcmp("-485", argv[1]) == 0 ) bsel = 0;
+	if 	( strcmp("-com1", argv[1]) == 0 ) bsel = 0;
+	else if ( strcmp("-com2", argv[1]) == 0 ) bsel = 1;
+	else if ( strcmp("-com3", argv[1]) == 0 ) bsel = 2;
+	else if ( strcmp("-com4", argv[1]) == 0 ) bsel = 3;
+	else if ( strcmp("-com5", argv[1]) == 0 ) bsel = 4;
+	else if ( strcmp("-com6", argv[1]) == 0 ) bsel = 5;
 	else {
 		printf("<Error> Input parameter invaild \n");
 		__printf_usage();
@@ -171,69 +174,274 @@ __sio_logic_device(0x06);
 	outb( xch , SIO_CFGDATA);	//
 switch ( bsel ) {
 	case 0:
-		
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		xData |=0x40;		
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-
-		outb(REG_GPIO_2_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		xData &=0xFE;		
-		outb(REG_GPIO_2_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-
-		outb(REG_GPIO_1_PIN_STAT, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		printf("0x%X = 0x%X\n",REG_GPIO_1_PIN_STAT,xData);
-
-		outb(REG_GPIO_2_PIN_STAT, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		printf("0x%X = 0x%X\n",REG_GPIO_2_PIN_STAT,xData);
-
+		if 	( strcmp("-232", argv[2]) == 0 )
+		{		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
+			xData |=0x01;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else if ( strcmp("-422", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
+			xData |=0x03;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else if ( strcmp("-485", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
+			xData |=0x02;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else {
+			printf("<Error> Input parameter invaild \n");
+			__printf_usage();
+			return -1;
+		}
 	break;
 	case 1:
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		xData |=0x40;		
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-
-		outb(REG_GPIO_2_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		xData |=0x01;		
-		outb(REG_GPIO_2_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-
-		outb(REG_GPIO_1_PIN_STAT, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		printf("0x%X = 0x%X\n",REG_GPIO_1_PIN_STAT,xData);
-
-		outb(REG_GPIO_2_PIN_STAT, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		printf("0x%X = 0x%X\n",REG_GPIO_2_PIN_STAT,xData);
+		if 	( strcmp("-232", argv[2]) == 0 )
+		{		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xE7;
+			xData |=0x08;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else if ( strcmp("-422", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xE7;
+			xData |=0x18;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else if ( strcmp("-485", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xE7;
+			xData |=0x10;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else {
+			printf("<Error> Input parameter invaild \n");
+			__printf_usage();
+			return -1;
+		}
 	break;
 	case 2:
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		xData &=0xBF;		
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-
-		outb(REG_GPIO_2_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		xData |=0x01;		
-		outb(REG_GPIO_2_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-
-		outb(REG_GPIO_1_PIN_STAT, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		printf("0x%X = 0x%X\n",REG_GPIO_1_PIN_STAT,xData);
-
-		outb(REG_GPIO_2_PIN_STAT, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA);
-		printf("0x%X = 0x%X\n",REG_GPIO_2_PIN_STAT,xData);
+		if 	( strcmp("-232", argv[2]) == 0 )
+		{		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0x3F;
+			xData |=0x40;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else if ( strcmp("-422", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0x3F;
+			xData |=0xC0;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else if ( strcmp("-485", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0x3F;
+			xData |=0x80;		
+			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
+		}
+		else {
+			printf("<Error> Input parameter invaild \n");
+			__printf_usage();
+			return -1;
+		}
+	break;
+	case 3:
+		if 	( strcmp("-232", argv[2]) == 0 )
+		{		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xF9;
+			xData |=0x02;		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+			outb(REG_GPIO_8_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_8_PIN_STAT,xData);
+		}
+		else if ( strcmp("-422", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xF9;
+			xData |=0x06;		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_8_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_8_PIN_STAT,xData);
+		}
+		else if ( strcmp("-485", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xF9;
+			xData |=0x04;		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_8_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_8_PIN_STAT,xData);
+		}
+		else {
+			printf("<Error> Input parameter invaild \n");
+			__printf_usage();
+			return -1;
+		}
+	break;
+	case 4:
+		if 	( strcmp("-232", argv[2]) == 0 )
+		{		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+			outb(REG_GPIO_8_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_8_PIN_STAT,xData);
+		}
+		else if ( strcmp("-422", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x30;		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_8_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_8_PIN_STAT,xData);
+		}
+		else if ( strcmp("-485", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x20;		
+			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_8_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_8_PIN_STAT,xData);
+		}
+		else {
+			printf("<Error> Input parameter invaild \n");
+			__printf_usage();
+			return -1;
+		}
+	break;
+	case 5:
+		if 	( strcmp("-232", argv[2]) == 0 )
+		{		
+			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
+			xData |=0x01;		
+			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+			outb(REG_GPIO_1_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_1_PIN_STAT,xData);
+		}
+		else if ( strcmp("-422", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
+			xData |=0x03;		
+			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_1_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_1_PIN_STAT,xData);
+		}
+		else if ( strcmp("-485", argv[2]) == 0 )
+		{
+			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
+			xData |=0x02;		
+			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+	
+	
+			outb(REG_GPIO_1_PIN_STAT, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA);
+			printf("0x%X = 0x%X\n",REG_GPIO_1_PIN_STAT,xData);
+		}
+		else {
+			printf("<Error> Input parameter invaild \n");
+			__printf_usage();
+			return -1;
+		}
 	break;
 	default:
 	break;
