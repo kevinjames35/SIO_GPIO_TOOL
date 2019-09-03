@@ -21,8 +21,8 @@
 #define uint64_t 		unsigned long long
 
 
-#define SIO_CFGINDEX	0x2E
-#define SIO_CFGDATA	0x2F
+#define SIO_CFGINDEX	0x4E
+#define SIO_CFGDATA	0x4F
 
 
 #define REG_GPIO_ENABLE	0x30
@@ -172,8 +172,50 @@ __sio_logic_device(0x06);
 	xch = inb(SIO_CFGDATA)| 0x01 ;  
 	outb( 0x30, SIO_CFGINDEX);
 	outb( xch , SIO_CFGDATA);	//
+
+	//set gpio function pin output mode
+	outb(REG_GPIO_1_OUT_EN, SIO_CFGINDEX);
+	xData=(uint16_t)inb(SIO_CFGDATA);
+	xData |=0x03;		
+	outb(REG_GPIO_1_OUT_EN, SIO_CFGINDEX);
+	outb(xData,SIO_CFGDATA);
+	outb(REG_GPIO_7_OUT_EN, SIO_CFGINDEX);
+	outb(0xFF,SIO_CFGDATA);
+	outb(REG_GPIO_8_OUT_EN, SIO_CFGINDEX);
+	outb(0xFF,SIO_CFGDATA);
+
+	//set gpio function output drive mode
+	outb(REG_GPIO_1_DRIVE_EN, SIO_CFGINDEX);
+	xData=(uint16_t)inb(SIO_CFGDATA);
+	xData |=0x03;		
+	outb(REG_GPIO_1_DRIVE_EN, SIO_CFGINDEX);
+	outb(REG_GPIO_7_DRIVE_EN, SIO_CFGINDEX);
+	outb(0xFF,SIO_CFGDATA);
+	outb(REG_GPIO_8_DRIVE_EN, SIO_CFGINDEX);
+	outb(0xFF,SIO_CFGDATA);
+
+
 switch ( bsel ) {
 	case 0:
+		//init multi function register for gpio 7X
+		outb(0x27, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF2;
+		xData |=0x00;		
+		outb(0x27, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+	
+		outb(0x28, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA);
+		xData |=0x20;		
+		outb(0x28, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+
+		outb(0x2B, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xFE;
+		xData |=0x00;		
+		outb(0x2B, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
@@ -219,6 +261,25 @@ switch ( bsel ) {
 		}
 	break;
 	case 1:
+		//init multi function register for gpio 7X
+		outb(0x27, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF2;
+		xData |=0x00;		
+		outb(0x27, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+	
+		outb(0x28, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA);
+		xData |=0x20;		
+		outb(0x28, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+
+		outb(0x2B, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xFE;
+		xData |=0x00;		
+		outb(0x2B, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
@@ -264,6 +325,25 @@ switch ( bsel ) {
 		}
 	break;
 	case 2:
+		//init multi function register for gpio 7X
+		outb(0x27, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF2;
+		xData |=0x00;		
+		outb(0x27, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+	
+		outb(0x28, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA);
+		xData |=0x20;		
+		outb(0x28, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+
+		outb(0x2B, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xFE;
+		xData |=0x00;		
+		outb(0x2B, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
@@ -309,6 +389,19 @@ switch ( bsel ) {
 		}
 	break;
 	case 3:
+		//init multi function register for gpio 8X
+		outb(0x27, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF3;
+		xData |=0x00;		
+		outb(0x27, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+	
+		outb(0x28, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA);
+		xData |=0x20;		
+		outb(0x28, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
 			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
@@ -354,6 +447,19 @@ switch ( bsel ) {
 		}
 	break;
 	case 4:
+		//init multi function register for gpio 8X
+		outb(0x27, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF3;
+		xData |=0x00;		
+		outb(0x27, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+	
+		outb(0x28, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA);
+		xData |=0x20;		
+		outb(0x28, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
 			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
@@ -399,6 +505,20 @@ switch ( bsel ) {
 		}
 	break;
 	case 5:
+
+		//init multi function register for gpio 1X
+		outb(0x27, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF2;
+		xData |=0x04;		
+		outb(0x27, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+	
+		outb(0x2C, SIO_CFGINDEX);
+		xData=(uint16_t)inb(SIO_CFGDATA);
+		xData |=0x01;		
+		outb(0x2C, SIO_CFGINDEX);
+		outb(xData,SIO_CFGDATA);
+		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
 			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
