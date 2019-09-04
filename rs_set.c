@@ -221,15 +221,6 @@ switch ( bsel ) {
 		outb(0x2B, SIO_CFGINDEX);
 		outb(xData,SIO_CFGDATA);
 
-		outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA) & 0xFB;
-		xData |=0x04;		
-		outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-	
-		//outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
-		//xData=(uint16_t)inb(SIO_CFGDATA);
-		//printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
 
 		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
@@ -246,6 +237,16 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+			__sio_logic_device(0x06);
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
 			xData |=0x03;		
@@ -259,6 +260,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
 			xData |=0x02;		
@@ -296,15 +309,6 @@ switch ( bsel ) {
 		outb(0x2B, SIO_CFGINDEX);
 		outb(xData,SIO_CFGDATA);
 
-		outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA) & 0xDF;
-		xData |=0x20;		
-		outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-	
-		//outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
-		//xData=(uint16_t)inb(SIO_CFGDATA);
-		//printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
 		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
@@ -320,6 +324,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xE7;
 			xData |=0x18;		
@@ -333,6 +349,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xE7;
 			xData |=0x10;		
@@ -370,15 +398,6 @@ switch ( bsel ) {
 		outb(0x2B, SIO_CFGINDEX);
 		outb(xData,SIO_CFGDATA);
 
-		outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA) & 0xFE;
-		xData |=0x01;		
-		outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-	
-		//outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
-		//xData=(uint16_t)inb(SIO_CFGDATA);
-		//printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
 		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
@@ -394,6 +413,19 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
+
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0x3F;
 			xData |=0xC0;		
@@ -407,6 +439,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_7_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0x3F;
 			xData |=0x80;		
@@ -438,15 +482,6 @@ switch ( bsel ) {
 		outb(0x28, SIO_CFGINDEX);
 		outb(xData,SIO_CFGDATA);
 
-		outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA) & 0xF7;
-		xData |=0x08;		
-		outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
-	
-		//outb(REG_GPIO_7_PIN_STAT, SIO_CFGINDEX);
-		//xData=(uint16_t)inb(SIO_CFGDATA);
-		//printf("0x%X = 0x%X\n",REG_GPIO_7_PIN_STAT,xData);
 		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
@@ -462,6 +497,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xF9;
 			xData |=0x06;		
@@ -475,6 +522,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xF9;
 			xData |=0x04;		
@@ -506,11 +565,6 @@ switch ( bsel ) {
 		outb(0x28, SIO_CFGINDEX);
 		outb(xData,SIO_CFGDATA);
 
-		outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA) & 0xBF;
-		xData |=0x40;		
-		outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
 		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
@@ -526,6 +580,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
 			xData |=0x30;		
@@ -539,6 +605,18 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_8_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
 			xData |=0x20;		
@@ -571,11 +649,6 @@ switch ( bsel ) {
 		outb(0x2C, SIO_CFGINDEX);
 		outb(xData,SIO_CFGDATA);
 
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		xData=(uint16_t)inb(SIO_CFGDATA) & 0xFB;
-		xData |=0x04;		
-		outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
-		outb(xData,SIO_CFGDATA);
 		//finish init
 		if 	( strcmp("-232", argv[2]) == 0 )
 		{		
@@ -591,6 +664,17 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+			__sio_logic_device(0x06);
+
 			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
 			xData |=0x03;		
@@ -604,6 +688,16 @@ switch ( bsel ) {
 		}
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
+
+			__sio_logic_device(0x10);
+
+			outb(0xF0, SIO_CFGINDEX);
+			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
+			xData |=0x10;		
+			outb(0xF0, SIO_CFGINDEX);
+			outb(xData,SIO_CFGDATA);
+
+			__sio_logic_device(0x06);
 			outb(REG_GPIO_1_OUT_DATA, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xFC;
 			xData |=0x02;		
