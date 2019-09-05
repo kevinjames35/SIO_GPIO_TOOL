@@ -325,7 +325,7 @@ switch ( bsel ) {
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x11);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -350,7 +350,7 @@ switch ( bsel ) {
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x11);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -415,7 +415,7 @@ switch ( bsel ) {
 		{
 
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x12);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -440,7 +440,7 @@ switch ( bsel ) {
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x12);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -498,7 +498,7 @@ switch ( bsel ) {
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x13);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -523,7 +523,7 @@ switch ( bsel ) {
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x13);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -581,7 +581,7 @@ switch ( bsel ) {
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x14);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -606,7 +606,7 @@ switch ( bsel ) {
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x14);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -665,7 +665,7 @@ switch ( bsel ) {
 		else if ( strcmp("-422", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x15);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
@@ -689,7 +689,7 @@ switch ( bsel ) {
 		else if ( strcmp("-485", argv[2]) == 0 )
 		{
 
-			__sio_logic_device(0x10);
+			__sio_logic_device(0x15);
 
 			outb(0xF0, SIO_CFGINDEX);
 			xData=(uint16_t)inb(SIO_CFGDATA) & 0xCF;
